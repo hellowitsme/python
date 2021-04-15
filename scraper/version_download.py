@@ -1,5 +1,6 @@
 import requests
 import re
+import csv
 
 r = requests.get('https://www.python.org/downloads/')
 
@@ -15,3 +16,6 @@ for li in re.findall(r'<li>.+?</li>',
 release.sort()
 for name, date in release:
     print(f'{name:15}{date}')
+    
+with open('output.csv', 'w', encoding='utf-8', newline='') as f:
+    csv.writer(f).writerows(release)
